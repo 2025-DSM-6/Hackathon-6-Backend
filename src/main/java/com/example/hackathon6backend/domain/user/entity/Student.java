@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.user.entity;
 
-import com.example.hackathon6backend.domain.classroom.entity.Class;
+import com.example.hackathon6backend.domain.subject.entity.Class;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
