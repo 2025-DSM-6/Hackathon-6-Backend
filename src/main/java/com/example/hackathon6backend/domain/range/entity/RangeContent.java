@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "range_content")
+@Table(name = "tbl_range_content")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class RangeContent {
