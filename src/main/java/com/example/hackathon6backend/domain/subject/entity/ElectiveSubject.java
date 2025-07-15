@@ -1,4 +1,4 @@
-package com.example.hackathon6backend.domain.user.entity;
+package com.example.hackathon6backend.domain.subject.entity;
 
 public enum ElectiveSubject {
     server_dev,
