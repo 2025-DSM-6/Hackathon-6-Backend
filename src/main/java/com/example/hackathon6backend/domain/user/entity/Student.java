@@ -1,6 +1,7 @@
 package com.example.hackathon6backend.domain.user.entity;
 
 import com.example.hackathon6backend.domain.subject.entity.Class;
+import com.example.hackathon6backend.domain.subject.entity.ElectiveSubject;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "students")
+@Table(name = "tbl_student")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Student {

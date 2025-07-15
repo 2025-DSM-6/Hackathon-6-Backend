@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "subject")
+@Table(name = "tbl_subject")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Subject {
