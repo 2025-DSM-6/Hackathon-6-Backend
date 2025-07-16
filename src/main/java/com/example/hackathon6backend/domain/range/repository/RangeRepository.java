@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface RangeRepository extends JpaRepository<Range, Long> {
+public interface RangeRepository extends JpaRepository<Range, Long>, RangeRepositoryCustom {
     Optional<Range> findBySubjectId(Long subjectId);
     
     @Query("SELECT r FROM Range r JOIN FETCH r.subject s JOIN FETCH r.rangeContents WHERE s.user.userId = :teacherId")
