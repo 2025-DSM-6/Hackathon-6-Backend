@@ -1,4 +1,4 @@
-package com.example.hackathon6backend.domain.subject.entity;
+package com.example.hackathon6backend.domain.room.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

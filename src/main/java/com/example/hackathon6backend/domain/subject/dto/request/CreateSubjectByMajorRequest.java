@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.subject.dto.request;
 
-import com.example.hackathon6backend.domain.subject.entity.ClassMajor;
+import com.example.hackathon6backend.domain.room.entity.ClassMajor;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

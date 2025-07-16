@@ -2,9 +2,9 @@ package com.example.hackathon6backend.domain.auth.service;
 
 import com.example.hackathon6backend.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.hackathon6backend.domain.auth.presentation.dto.response.TokenResponse;
-import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
-import com.example.hackathon6backend.domain.subject.exception.ClassRoomNotFoundException;
-import com.example.hackathon6backend.domain.subject.repository.ClassRoomRepository;
+import com.example.hackathon6backend.domain.room.entity.ClassRoom;
+import com.example.hackathon6backend.domain.room.exception.ClassRoomNotFoundException;
+import com.example.hackathon6backend.domain.room.repository.ClassRoomRepository;
 import com.example.hackathon6backend.domain.user.dto.response.UserResponse;
 import com.example.hackathon6backend.domain.user.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.Teacher;

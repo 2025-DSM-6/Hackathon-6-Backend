@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.range.entity;
 
-import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
+import com.example.hackathon6backend.domain.room.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
 import jakarta.persistence.*;
 import lombok.AccessLevel;

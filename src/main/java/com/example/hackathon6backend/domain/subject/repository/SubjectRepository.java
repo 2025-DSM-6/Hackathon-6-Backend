@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.subject.repository;
 
-import com.example.hackathon6backend.domain.subject.entity.ClassMajor;
+import com.example.hackathon6backend.domain.room.entity.ClassMajor;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
