@@ -11,7 +11,12 @@ public enum ErrorCode {
 
     // jwt
     EXPIRED_JWT(HttpStatus.UNAUTHORIZED, "Expired JWT"),
-    INVALID_JWT(HttpStatus.UNAUTHORIZED, "Invalid JWT");
+    INVALID_JWT(HttpStatus.UNAUTHORIZED, "Invalid JWT"),
+
+    // feign
+    FEIGN_BAD_REQUEST(HttpStatus.BAD_REQUEST, "Feign Bad Request"),
+    FEIGN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Feign Unauthorized"),
+    FEIGN_FORBIDDEN(HttpStatus.FORBIDDEN, "Feign Forbidden");
 
     private final HttpStatus status;
     private final String message;
