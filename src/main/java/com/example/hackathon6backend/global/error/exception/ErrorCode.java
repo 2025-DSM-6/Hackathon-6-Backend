@@ -7,7 +7,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
-    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error");
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error"),
+
+    // jwt
+    EXPIRED_JWT(HttpStatus.UNAUTHORIZED, "Expired JWT"),
+    INVALID_JWT(HttpStatus.UNAUTHORIZED, "Invalid JWT");
 
     private final HttpStatus status;
     private final String message;
