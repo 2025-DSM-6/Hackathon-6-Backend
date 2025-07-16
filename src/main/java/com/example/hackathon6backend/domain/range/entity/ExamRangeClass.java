@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.range.entity;
 
-import com.example.hackathon6backend.domain.subject.entity.Class;
+import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -20,15 +20,15 @@ public class ExamRangeClass {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-    private Class classEntity;
+    private ClassRoom classRoomEntity;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
     @Builder
-    public ExamRangeClass(Class classEntity, Subject subject) {
-        this.classEntity = classEntity;
+    public ExamRangeClass(ClassRoom classRoomEntity, Subject subject) {
+        this.classRoomEntity = classRoomEntity;
         this.subject = subject;
     }
 } 

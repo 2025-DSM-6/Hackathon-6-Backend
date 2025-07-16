@@ -17,14 +17,18 @@ public class User {
     private Long userId;
     
     @Column(length = 100)
-    private String nickname;
+    private String accountId;
     
     @Column(length = 50)
     private String username;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Builder
-    public User(String nickname, String username) {
-        this.nickname = nickname;
+    public User(String accountId, String username, Role role) {
+        this.accountId = accountId;
         this.username = username;
+        this.role = role;
     }
 } 
