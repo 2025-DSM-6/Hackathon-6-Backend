@@ -43,7 +43,7 @@ public class Student {
     private ClassRoom classRoomEntity;
 
     @Version
-    private Long version;
+    private Long version = 0L;
 
     @Builder
     public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,

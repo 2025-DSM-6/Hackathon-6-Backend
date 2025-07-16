@@ -21,7 +21,7 @@ public class Teacher {
     private User user;
 
     @Version
-    private Long version;
+    private Long version = 0L;
 
     @Builder
     public Teacher(User user) {
