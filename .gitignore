@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ## Query DSL
-/build/generated/
+/src/main/generated
