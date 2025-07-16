@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 public class Teacher {
     
     @Id
+    private Long id;
+
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
