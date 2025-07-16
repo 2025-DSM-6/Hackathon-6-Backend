@@ -35,23 +35,37 @@ public class LoginService {
 
     @Transactional
     public TokenResponse execute(LoginRequest request) {
-        UserResponse userResponse = xquareClient.user(request);
+        User user = userRepository.findByAccountId(request.accountId())
+            .orElse(null);
 
-        User user = userRepository.findByAccountId(userResponse.accountId())
-            .orElseGet(() -> {
-                if (userResponse.userRole().toString().equals("STU")) {
-                    return createStudent(userResponse);
-                } else if (userResponse.userRole().toString().equals("SCH")) {
-                    return createTeacher(userResponse);
-                } else {
-                    throw InvalidRoleException.EXCEPTION;
-                }
-            });
+        if (user != null) {
+            return generateToken(user);
+        } else {
+            UserResponse userResponse = xquareClient.user(request);
 
+            User newUser = userRepository.findByAccountId(userResponse.accountId())
+                .orElseGet(() -> {
+                    if (userResponse.userRole().toString().equals("STU")) {
+                        return createStudent(userResponse);
+                    } else if (userResponse.userRole().toString().equals("SCH")) {
+                        return createTeacher(userResponse);
+                    } else {
+                        throw InvalidRoleException.EXCEPTION;
+                    }
+                });
+
+            checkPassword(userResponse, newUser);
+            return generateToken(newUser);
+        }
+    }
+
+    private void checkPassword(UserResponse userResponse, User user) {
         if (!passwordEncoder.matches(userResponse.password(), user.getPassword())) {
             throw PasswordMisMatchException.EXCEPTION;
         }
+    }
 
+    private TokenResponse generateToken(User user) {
         String accessToken = jwtTokenProvider.generateAccessToken(user.getAccountId(), user.getRole());
 
         return TokenResponse.builder()
