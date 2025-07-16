@@ -6,10 +6,7 @@ import com.example.hackathon6backend.global.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class StudentRangeController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<StudentRangeResponse>>> getMyRanges(
-            @AuthenticationPrincipal Long userId
+            @RequestParam Long userId
     ) {
         List<StudentRangeResponse> response = studentRangeService.getMyRanges(userId);
         return ResponseEntity.ok(

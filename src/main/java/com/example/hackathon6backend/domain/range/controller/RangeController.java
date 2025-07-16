@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class RangeController {
     @PostMapping("/{subject-id}")
     public ResponseEntity<ApiResponse<Void>> createRange(
             @PathVariable("subject-id") Long subjectId,
-            @AuthenticationPrincipal Long userId,
+            @RequestParam Long userId,
             @RequestBody @Valid CreateRangeRequest request
     ) {
         rangeService.createRange(subjectId, userId, request);
@@ -38,7 +37,7 @@ public class RangeController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<RangeResponse>>> getAllRanges(
-            @AuthenticationPrincipal Long userId
+            @RequestParam Long userId
     ) {
         List<RangeResponse> response = rangeService.getAllRanges(userId);
         return ResponseEntity.ok(
@@ -52,7 +51,7 @@ public class RangeController {
     @DeleteMapping("/{range-id}")
     public ResponseEntity<ApiResponse<Void>> deleteRange(
             @PathVariable("range-id") Long rangeId,
-            @AuthenticationPrincipal Long userId
+            @RequestParam Long userId
     ) {
         rangeService.deleteRange(rangeId, userId);
         return ResponseEntity.ok(
@@ -65,7 +64,7 @@ public class RangeController {
     @PutMapping("/{range-id}")
     public ResponseEntity<ApiResponse<Void>> updateRange(
             @PathVariable("range-id") Long rangeId,
-            @AuthenticationPrincipal Long userId,
+            @RequestParam Long userId,
             @RequestBody @Valid UpdateRangeRequest request
     ) {
         rangeService.updateRange(rangeId, userId, request);

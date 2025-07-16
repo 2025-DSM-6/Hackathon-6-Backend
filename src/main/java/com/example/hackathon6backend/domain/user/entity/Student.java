@@ -15,7 +15,11 @@ import lombok.NoArgsConstructor;
 public class Student {
     
     @Id
-    @OneToOne(fetch = FetchType.LAZY)
+    @Column(name = "user_id")
+    private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @MapsId
     @JoinColumn(name = "user_id")
     private User user;
     
@@ -33,13 +37,18 @@ public class Student {
     @JoinColumn(name = "class_id")
     private ClassRoom classRoomEntity;
 
+    @Version
+    private Long version;
+
     @Builder
     public Student(User user, Long solvedScore, String schoolNum, 
                   ElectiveSubject electiveSubject, ClassRoom classRoomEntity) {
         this.user = user;
+        this.id = user.getUserId();
         this.solvedScore = solvedScore;
         this.schoolNum = schoolNum;
         this.electiveSubject = electiveSubject;
         this.classRoomEntity = classRoomEntity;
+        this.version = 0L;
     }
 } 
