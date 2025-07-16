@@ -49,7 +49,7 @@ public class Student {
     public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,
                   ElectiveSubject electiveSubject, ClassRoom classEntity) {
         this.user = user;
-        this.id = user.getUserId();
+        this.id = user.getId();
         this.solvedScore = solvedScore;
         this.grade = grade;
         this.classNum = classNum;
@@ -57,5 +57,9 @@ public class Student {
         this.electiveSubject = electiveSubject;
         this.classRoomEntity = classRoomEntity;
         this.version = 0L;
+    }
+
+    public void updateSubject(ElectiveSubject electiveSubject) {
+        this.electiveSubject = electiveSubject;
     }
 } 
