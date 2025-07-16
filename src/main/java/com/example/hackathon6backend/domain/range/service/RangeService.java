@@ -10,7 +10,7 @@ import com.example.hackathon6backend.domain.range.repository.RangeRepository;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
 import com.example.hackathon6backend.domain.subject.repository.SubjectRepository;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
-import com.example.hackathon6backend.domain.user.repository.TeacherRepository;
+import com.example.hackathon6backend.domain.user.entity.repository.TeacherRepository;
 import com.example.hackathon6backend.global.error.exception.ErrorCode;
 import com.example.hackathon6backend.global.error.exception.HackathonException;
 import lombok.RequiredArgsConstructor;
