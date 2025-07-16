@@ -5,6 +5,7 @@ import com.example.hackathon6backend.domain.user.dto.response.GetUserResponse;
 import com.example.hackathon6backend.domain.user.service.GetUserService;
 import com.example.hackathon6backend.domain.user.service.UpdateSubjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +16,13 @@ public class UserController {
     private final GetUserService getUserService;
     private final UpdateSubjectService updateSubjectService;
 
-    @PostMapping
+    @GetMapping
     public GetUserResponse getUser() {
         return getUserService.execute();
     }
 
     @PatchMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateSubject(@RequestBody UpdateSubjectRequest request) {
         updateSubjectService.execute(request);
     }
