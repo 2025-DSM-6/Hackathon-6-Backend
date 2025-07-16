@@ -26,6 +26,6 @@ public class Teacher {
     @Builder
     public Teacher(User user) {
         this.user = user;
-        this.id = user.getUserId();
+        this.id = user.getId();
     }
 } 
