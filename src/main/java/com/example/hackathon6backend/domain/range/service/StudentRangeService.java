@@ -3,8 +3,9 @@ package com.example.hackathon6backend.domain.range.service;
 import com.example.hackathon6backend.domain.range.dto.response.StudentRangeResponse;
 import com.example.hackathon6backend.domain.range.entity.Range;
 import com.example.hackathon6backend.domain.range.repository.RangeRepository;
-import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
-import com.example.hackathon6backend.domain.subject.repository.ClassRoomRepository;
+import com.example.hackathon6backend.domain.room.entity.ClassRoom;
+import com.example.hackathon6backend.domain.room.exception.ClassRoomNotFoundException;
+import com.example.hackathon6backend.domain.room.repository.ClassRoomRepository;
 import com.example.hackathon6backend.domain.user.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.repository.StudentRepository;
 import com.example.hackathon6backend.global.error.exception.ErrorCode;
@@ -30,7 +31,7 @@ public class StudentRangeService {
 
         ClassRoom classRoom = student.getClassRoomEntity();
         if (classRoom == null) {
-            throw new HackathonException(ErrorCode.CLASS_NOT_FOUND);
+            throw ClassRoomNotFoundException.EXCEPTION;
         }
 
         // 학생의 반에 해당하는 모든 시험범위 조회

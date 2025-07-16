@@ -1,14 +1,16 @@
 package com.example.hackathon6backend.domain.subject.service;
 
 import com.example.hackathon6backend.domain.range.entity.ExamRangeClass;
+import com.example.hackathon6backend.domain.room.exception.ClassRoomNotFoundException;
 import com.example.hackathon6backend.domain.subject.dto.request.CreateSubjectByMajorRequest;
 import com.example.hackathon6backend.domain.subject.dto.request.CreateSubjectRequest;
 import com.example.hackathon6backend.domain.subject.dto.request.UpdateSubjectRequest;
 import com.example.hackathon6backend.domain.subject.dto.response.SubjectResponse;
-import com.example.hackathon6backend.domain.subject.entity.ClassMajor;
-import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
+import com.example.hackathon6backend.domain.room.entity.ClassMajor;
+import com.example.hackathon6backend.domain.room.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
-import com.example.hackathon6backend.domain.subject.repository.ClassRoomRepository;
+import com.example.hackathon6backend.domain.room.repository.ClassRoomRepository;
+import com.example.hackathon6backend.domain.subject.exception.SubjectNotFoundException;
 import com.example.hackathon6backend.domain.subject.repository.SubjectRepository;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
 import com.example.hackathon6backend.domain.user.entity.repository.TeacherRepository;
@@ -44,7 +46,7 @@ public class SubjectService {
         // 반 연결
         List<ClassRoom> classRooms = classRoomRepository.findAllById(request.getClassIds());
         if (classRooms.size() != request.getClassIds().size()) {
-            throw new HackathonException(ErrorCode.CLASS_NOT_FOUND);
+            throw ClassRoomNotFoundException.EXCEPTION;
         }
 
         // ExamRangeClass 생성 및 연결
@@ -72,7 +74,7 @@ public class SubjectService {
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
         Subject subject = subjectRepository.findById(subjectId)
-                .orElseThrow(() -> new HackathonException(ErrorCode.SUBJECT_NOT_FOUND));
+                .orElseThrow(() -> SubjectNotFoundException.EXCEPTION);
 
         // 권한 체크
         if (!subject.getUser().getId().equals(teacher.getUser().getId())) {
@@ -88,7 +90,7 @@ public class SubjectService {
         // 새로운 반 연결
         List<ClassRoom> classRooms = classRoomRepository.findAllById(request.getClassIds());
         if (classRooms.size() != request.getClassIds().size()) {
-            throw new HackathonException(ErrorCode.CLASS_NOT_FOUND);
+            throw ClassRoomNotFoundException.EXCEPTION;
         }
 
         classRooms.forEach(classRoom -> {
@@ -130,7 +132,7 @@ public class SubjectService {
         // 선택된 전공에 해당하는 모든 반 조회
         List<ClassRoom> classRooms = classRoomRepository.findAllByClassMajorIn(request.getClassMajors());
         if (classRooms.isEmpty()) {
-            throw new HackathonException(ErrorCode.CLASS_NOT_FOUND);
+            throw ClassRoomNotFoundException.EXCEPTION;
         }
 
         // ExamRangeClass 생성 및 연결

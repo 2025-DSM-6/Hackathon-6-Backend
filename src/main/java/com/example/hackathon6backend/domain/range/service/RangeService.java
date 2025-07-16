@@ -5,9 +5,12 @@ import com.example.hackathon6backend.domain.range.dto.request.UpdateRangeRequest
 import com.example.hackathon6backend.domain.range.dto.response.RangeResponse;
 import com.example.hackathon6backend.domain.range.entity.Range;
 import com.example.hackathon6backend.domain.range.entity.RangeContent;
-import com.example.hackathon6backend.domain.range.exception.RangeException;
+import com.example.hackathon6backend.domain.range.exception.EmptyRangeContentException;
+import com.example.hackathon6backend.domain.range.exception.InvalidRangeAccessException;
+import com.example.hackathon6backend.domain.range.exception.RangeNotFoundException;
 import com.example.hackathon6backend.domain.range.repository.RangeRepository;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
+import com.example.hackathon6backend.domain.subject.exception.SubjectNotFoundException;
 import com.example.hackathon6backend.domain.subject.repository.SubjectRepository;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
 import com.example.hackathon6backend.domain.user.entity.repository.TeacherRepository;
@@ -35,15 +38,15 @@ public class RangeService {
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
         Subject subject = subjectRepository.findById(subjectId)
-                .orElseThrow(() -> new HackathonException(ErrorCode.SUBJECT_NOT_FOUND));
+                .orElseThrow(() -> SubjectNotFoundException.EXCEPTION);
 
         if (!subject.getUser().getId().equals(teacher.getUser().getId())) {
-            throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
+            throw InvalidRangeAccessException.EXCEPTION;
         }
 
         List<RangeContentRequest> examRangeList = request.getExamRange();
         if (examRangeList == null || examRangeList.isEmpty()) {
-            throw new RangeException(ErrorCode.EMPTY_RANGE_CONTENT);
+            throw EmptyRangeContentException.EXCEPTION;
         }
 
         Range range = Range.builder()
@@ -79,10 +82,10 @@ public class RangeService {
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
         Range range = rangeRepository.findById(rangeId)
-                .orElseThrow(() -> new RangeException(ErrorCode.RANGE_NOT_FOUND));
+                .orElseThrow(() -> RangeNotFoundException.EXCEPTION);
 
         if (!range.getSubject().getUser().getId().equals(teacher.getUser().getId())) {
-            throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
+            throw InvalidRangeAccessException.EXCEPTION;
         }
 
         rangeRepository.delete(range);
@@ -94,15 +97,15 @@ public class RangeService {
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
         Range range = rangeRepository.findById(rangeId)
-                .orElseThrow(() -> new RangeException(ErrorCode.RANGE_NOT_FOUND));
+                .orElseThrow(() -> RangeNotFoundException.EXCEPTION);
 
         if (!range.getSubject().getUser().getId().equals(teacher.getUser().getId())) {
-            throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
+            throw InvalidRangeAccessException.EXCEPTION;
         }
 
         List<RangeContentRequest> examRangeList = request.getExamRange();
         if (examRangeList == null || examRangeList.isEmpty()) {
-            throw new RangeException(ErrorCode.EMPTY_RANGE_CONTENT);
+            throw EmptyRangeContentException.EXCEPTION;
         }
 
         range.updateRange(request.getMemo(), examRangeList);
