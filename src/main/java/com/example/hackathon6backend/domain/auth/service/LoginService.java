@@ -2,6 +2,9 @@ package com.example.hackathon6backend.domain.auth.service;
 
 import com.example.hackathon6backend.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.hackathon6backend.domain.auth.presentation.dto.response.TokenResponse;
+import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
+import com.example.hackathon6backend.domain.subject.exception.ClassRoomNotFoundException;
+import com.example.hackathon6backend.domain.subject.repository.ClassRoomRepository;
 import com.example.hackathon6backend.domain.user.dto.response.UserResponse;
 import com.example.hackathon6backend.domain.user.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
@@ -32,6 +35,7 @@ public class LoginService {
     private final StudentRepository studentRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProperties jwtProperties;
+    private final ClassRoomRepository classRoomRepository;
 
     @Transactional
     public TokenResponse execute(LoginRequest request) {
@@ -79,6 +83,9 @@ public class LoginService {
             throw InvalidRoleException.EXCEPTION;
         }
 
+        ClassRoom classRoom = classRoomRepository.findByClassNameAndGrade(userResponse.classNum(), userResponse.grade())
+            .orElseThrow(() -> ClassRoomNotFoundException.EXCEPTION);
+
          User user = userRepository.save(
                User.builder()
                    .accountId(userResponse.accountId())
@@ -93,6 +100,7 @@ public class LoginService {
                  .grade(userResponse.grade())
                  .classNum(userResponse.classNum())
                  .num(userResponse.num())
+                 .classEntity(classRoom)
                  .build()
          );
 
