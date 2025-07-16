@@ -16,7 +16,15 @@ public enum ErrorCode {
     // feign
     FEIGN_BAD_REQUEST(HttpStatus.BAD_REQUEST, "Feign Bad Request"),
     FEIGN_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "Feign Unauthorized"),
-    FEIGN_FORBIDDEN(HttpStatus.FORBIDDEN, "Feign Forbidden");
+    FEIGN_FORBIDDEN(HttpStatus.FORBIDDEN, "Feign Forbidden"),
+
+    // user
+    ALREADY_USER_EXISTS(HttpStatus.CONFLICT, "Already User Exists"),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "User Not Found"),
+    INVALID_ROLE(HttpStatus.UNAUTHORIZED, "Invalid Role"),
+
+    // auth
+    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "Password Mismatch");
 
     private final HttpStatus status;
     private final String message;
