@@ -12,6 +12,6 @@ public interface RangeRepository extends JpaRepository<Range, Long>, RangeReposi
     @Query("SELECT r FROM Range r WHERE r.subject.subjectId = :subjectId")
     Optional<Range> findBySubjectId(@Param("subjectId") Long subjectId);
     
-    @Query("SELECT DISTINCT r FROM Range r JOIN FETCH r.subject s LEFT JOIN FETCH r.rangeContents WHERE s.user.userId = :teacherId")
+    @Query("SELECT DISTINCT r FROM Range r JOIN FETCH r.subject s LEFT JOIN FETCH r.rangeContents WHERE s.user.id = :teacherId")
     List<Range> findAllByTeacherId(@Param("teacherId") Long teacherId);
 } 

@@ -1,8 +1,9 @@
 package com.example.hackathon6backend.domain.auth.service;
-
+;
 import com.example.hackathon6backend.domain.auth.presentation.dto.request.LoginRequest;
 import com.example.hackathon6backend.domain.auth.presentation.dto.response.TokenResponse;
 import com.example.hackathon6backend.domain.user.dto.response.UserResponse;
+import com.example.hackathon6backend.domain.user.entity.Role;
 import com.example.hackathon6backend.domain.user.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
 import com.example.hackathon6backend.domain.user.entity.User;
@@ -60,52 +61,37 @@ public class LoginService {
             .build();
     }
 
-    private User createStudent(UserResponse userResponse) {
-        if (!userResponse.userRole().toString().equals("STU")) {
-            throw InvalidRoleException.EXCEPTION;
-        }
+    private User createStudent(UserResponse response) {
+        User user = User.builder()
+                .accountId(response.accountId())
+                .password(passwordEncoder.encode(response.password()))
+                .username(response.name())
+                .role(Role.STU)
+                .build();
+        user = userRepository.save(user);
 
-         User user = userRepository.save(
-               User.builder()
-                   .accountId(userResponse.accountId())
-                   .password(passwordEncoder.encode(userResponse.password()))
-                   .username(userResponse.name())
-                   .role(userResponse.userRole())
-               .build());
-
-         studentRepository.save(
-             Student.builder()
-                 .user(user)
-                 .grade(userResponse.grade())
-                 .classNum(userResponse.classNum())
-                 .num(userResponse.num())
-                 .build()
-         );
-
-         return user;
-    }
-
-    private User createTeacher(UserResponse userResponse) {
-        if (!userResponse.userRole().toString().equals("SCH")) {
-            throw InvalidRoleException.EXCEPTION;
-        }
-
-        User user = userRepository.save(
-            User.builder()
-                .accountId(userResponse.accountId())
-                .password(passwordEncoder.encode(userResponse.password()))
-                .username(userResponse.name())
-                .role(userResponse.userRole())
-                .build()
-        );
-
-        teacherRepository.save(
-            Teacher.builder()
+        Student student = Student.builder()
                 .user(user)
-                .build()
-        );
+                .build();
+        studentRepository.save(student);
 
         return user;
     }
 
+    private User createTeacher(UserResponse response) {
+        User user = User.builder()
+                .accountId(response.accountId())
+                .password(passwordEncoder.encode(response.password()))
+                .username(response.name())
+                .role(Role.SCH)
+                .build();
+        user = userRepository.save(user);
+
+        Teacher teacher = Teacher.builder()
+                .user(user)
+                .build();
+        teacherRepository.save(teacher);
+
+        return user;
+    }
 }

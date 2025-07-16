@@ -6,7 +6,7 @@ import com.example.hackathon6backend.domain.range.repository.RangeRepository;
 import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.repository.ClassRoomRepository;
 import com.example.hackathon6backend.domain.user.entity.Student;
-import com.example.hackathon6backend.domain.user.repository.StudentRepository;
+import com.example.hackathon6backend.domain.user.entity.repository.StudentRepository;
 import com.example.hackathon6backend.global.error.exception.ErrorCode;
 import com.example.hackathon6backend.global.error.exception.HackathonException;
 import lombok.RequiredArgsConstructor;
