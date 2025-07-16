@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.user.entity;
 
-import com.example.hackathon6backend.domain.subject.entity.Class;
+import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.ElectiveSubject;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -31,11 +31,11 @@ public class Student {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-    private Class classEntity;
+    private ClassRoom classEntity;
 
     @Builder
     public Student(User user, Long solvedScore, String schoolNum, 
-                  ElectiveSubject electiveSubject, Class classEntity) {
+                  ElectiveSubject electiveSubject, ClassRoom classEntity) {
         this.user = user;
         this.solvedScore = solvedScore;
         this.schoolNum = schoolNum;
