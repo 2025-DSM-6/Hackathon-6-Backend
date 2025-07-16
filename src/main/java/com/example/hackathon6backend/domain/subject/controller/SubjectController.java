@@ -36,7 +36,7 @@ public class SubjectController {
                 ));
     }
 
-    @PostMapping
+    @PostMapping("/by-major")
     public ResponseEntity<ApiResponse<Void>> createSubjectByMajor(
             @RequestBody @Valid CreateSubjectByMajorRequest request
     ) {
