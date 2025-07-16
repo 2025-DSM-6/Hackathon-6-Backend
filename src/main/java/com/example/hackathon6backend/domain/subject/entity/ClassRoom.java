@@ -21,12 +21,12 @@ public class ClassRoom {
     private ClassMajor classMajor;
     
     @Column(name = "class_name", length = 3)
-    private String className;
+    private Integer className;
     
     private Integer grade;
 
     @Builder
-    public ClassRoom(ClassMajor classMajor, String className, Integer grade) {
+    public ClassRoom(ClassMajor classMajor, Integer className, Integer grade) {
         this.classMajor = classMajor;
         this.className = className;
         this.grade = grade;
