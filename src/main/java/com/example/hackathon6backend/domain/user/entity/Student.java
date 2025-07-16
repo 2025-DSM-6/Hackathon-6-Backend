@@ -43,7 +43,7 @@ public class Student {
     private ClassRoom classRoomEntity;
 
     @Version
-    private Long version;
+    private Long version = 0L;
 
     @Builder
     public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,
@@ -57,5 +57,9 @@ public class Student {
         this.electiveSubject = electiveSubject;
         this.classRoomEntity = classRoomEntity;
         this.version = 0L;
+    }
+
+    public void updateSubject(ElectiveSubject electiveSubject) {
+        this.electiveSubject = electiveSubject;
     }
 } 
