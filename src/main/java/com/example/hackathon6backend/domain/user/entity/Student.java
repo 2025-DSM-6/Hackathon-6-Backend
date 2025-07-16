@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.user.entity;
 
-import com.example.hackathon6backend.domain.subject.entity.ClassRoom;
+import com.example.hackathon6backend.domain.room.entity.ClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.ElectiveSubject;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -55,7 +55,7 @@ public class Student {
         this.classNum = classNum;
         this.num = num;
         this.electiveSubject = electiveSubject;
-        this.classRoomEntity = classRoomEntity;
+        this.classRoomEntity = classEntity;
         this.version = 0L;
     }
 
