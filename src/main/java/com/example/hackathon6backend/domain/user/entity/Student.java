@@ -31,19 +31,11 @@ public class Student {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-<<<<<<< HEAD
     private ClassRoom classRoomEntity;
 
     @Builder
     public Student(User user, Long solvedScore, String schoolNum, 
                   ElectiveSubject electiveSubject, ClassRoom classRoomEntity) {
-=======
-    private ClassRoom classEntity;
-
-    @Builder
-    public Student(User user, Long solvedScore, String schoolNum, 
-                  ElectiveSubject electiveSubject, ClassRoom classEntity) {
->>>>>>> origin/main
         this.user = user;
         this.solvedScore = solvedScore;
         this.schoolNum = schoolNum;
