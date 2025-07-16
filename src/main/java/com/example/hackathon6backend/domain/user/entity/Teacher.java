@@ -14,14 +14,18 @@ public class Teacher {
     
     @Id
     private Long id;
-
+  
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Version
+    private Long version;
 
     @Builder
     public Teacher(User user) {
         this.user = user;
+        this.id = user.getUserId();
     }
 } 

@@ -17,8 +17,8 @@ public class Student {
     @Id
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     
@@ -40,17 +40,22 @@ public class Student {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "class_id")
-    private ClassRoom classEntity;
+    private ClassRoom classRoomEntity;
+
+    @Version
+    private Long version;
 
     @Builder
     public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,
                   ElectiveSubject electiveSubject, ClassRoom classEntity) {
         this.user = user;
+        this.id = user.getUserId();
         this.solvedScore = solvedScore;
         this.grade = grade;
         this.classNum = classNum;
         this.num = num;
         this.electiveSubject = electiveSubject;
-        this.classEntity = classEntity;
+        this.classRoomEntity = classRoomEntity;
+        this.version = 0L;
     }
 } 

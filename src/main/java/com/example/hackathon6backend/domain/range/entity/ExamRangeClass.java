@@ -31,4 +31,8 @@ public class ExamRangeClass {
         this.classRoomEntity = classRoomEntity;
         this.subject = subject;
     }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 } 
