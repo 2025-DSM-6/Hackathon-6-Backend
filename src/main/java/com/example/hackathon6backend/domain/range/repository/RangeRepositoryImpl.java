@@ -2,7 +2,7 @@ package com.example.hackathon6backend.domain.range.repository;
 
 import com.example.hackathon6backend.domain.range.entity.QRange;
 import com.example.hackathon6backend.domain.range.entity.Range;
-import com.example.hackathon6backend.domain.subject.entity.QClassRoom;
+import com.example.hackathon6backend.domain.room.entity.QClassRoom;
 import com.example.hackathon6backend.domain.subject.entity.QSubject;
 import com.example.hackathon6backend.domain.range.entity.QExamRangeClass;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -32,4 +32,4 @@ public class RangeRepositoryImpl implements RangeRepositoryCustom {
                 .where(classRoom.classId.eq(classId))
                 .fetch();
     }
-} 
+}
