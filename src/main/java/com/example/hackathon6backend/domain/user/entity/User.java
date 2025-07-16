@@ -22,9 +22,13 @@ public class User {
     @Column(length = 50)
     private String username;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Builder
-    public User(String accountId, String username) {
+    public User(String accountId, String username, Role role) {
         this.accountId = accountId;
         this.username = username;
+        this.role = role;
     }
 } 
