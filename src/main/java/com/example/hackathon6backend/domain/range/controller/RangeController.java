@@ -4,6 +4,7 @@ import com.example.hackathon6backend.domain.range.dto.request.CreateRangeRequest
 import com.example.hackathon6backend.domain.range.dto.request.UpdateRangeRequest;
 import com.example.hackathon6backend.domain.range.dto.response.RangeResponse;
 import com.example.hackathon6backend.domain.range.service.RangeService;
+import com.example.hackathon6backend.domain.user.facade.UserFacade;
 import com.example.hackathon6backend.global.common.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,14 +20,15 @@ import java.util.List;
 public class RangeController {
 
     private final RangeService rangeService;
+    private final UserFacade userFacade;
 
     @PostMapping("/{subject-id}")
     public ResponseEntity<ApiResponse<Void>> createRange(
             @PathVariable("subject-id") Long subjectId,
-            @RequestParam Long userId,
             @RequestBody @Valid CreateRangeRequest request
     ) {
-        rangeService.createRange(subjectId, userId, request);
+        Long finalUserId = userFacade.getUser().getId();
+        rangeService.createRange(subjectId, finalUserId, request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(ApiResponse.success(
@@ -37,9 +39,10 @@ public class RangeController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<RangeResponse>>> getAllRanges(
-            @RequestParam Long userId
+            @RequestParam(required = false) Long userId
     ) {
-        List<RangeResponse> response = rangeService.getAllRanges(userId);
+        Long finalUserId = userId != null ? userId : userFacade.getUser().getId();
+        List<RangeResponse> response = rangeService.getAllRanges(finalUserId);
         return ResponseEntity.ok(
                 ApiResponse.success(
                         HttpStatus.OK,
@@ -50,10 +53,10 @@ public class RangeController {
 
     @DeleteMapping("/{range-id}")
     public ResponseEntity<ApiResponse<Void>> deleteRange(
-            @PathVariable("range-id") Long rangeId,
-            @RequestParam Long userId
+            @PathVariable("range-id") Long rangeId
     ) {
-        rangeService.deleteRange(rangeId, userId);
+        Long finalUserId = userFacade.getUser().getId();
+        rangeService.deleteRange(rangeId, finalUserId);
         return ResponseEntity.ok(
                 ApiResponse.success(
                         HttpStatus.OK,
@@ -64,10 +67,10 @@ public class RangeController {
     @PutMapping("/{range-id}")
     public ResponseEntity<ApiResponse<Void>> updateRange(
             @PathVariable("range-id") Long rangeId,
-            @RequestParam Long userId,
             @RequestBody @Valid UpdateRangeRequest request
     ) {
-        rangeService.updateRange(rangeId, userId, request);
+        Long finalUserId = userFacade.getUser().getId();
+        rangeService.updateRange(rangeId, finalUserId, request);
         return ResponseEntity.ok(
                 ApiResponse.success(
                         HttpStatus.OK,
