@@ -14,7 +14,7 @@ public class Teacher {
     
     @Id
     private Long id;
-
+  
     @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.MERGE)
     @MapsId
     @JoinColumn(name = "user_id")

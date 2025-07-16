@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class Student {
     
     @Id
-    @Column(name = "user_id")
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
@@ -24,10 +23,16 @@ public class Student {
     private User user;
     
     @Column(name = "solved_score")
-    private Long solvedScore;
+    private Long solvedScore = 0L;
     
-    @Column(name = "school_num", length = 4)
-    private String schoolNum;
+    @Column(name = "grade")
+    private Integer grade;
+
+    @Column(name = "class_num")
+    private Integer classNum;
+
+    @Column(name = "num")
+    private Integer num;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "elective_subject")
@@ -41,12 +46,14 @@ public class Student {
     private Long version;
 
     @Builder
-    public Student(User user, Long solvedScore, String schoolNum, 
-                  ElectiveSubject electiveSubject, ClassRoom classRoomEntity) {
+    public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,
+                  ElectiveSubject electiveSubject, ClassRoom classEntity) {
         this.user = user;
         this.id = user.getUserId();
         this.solvedScore = solvedScore;
-        this.schoolNum = schoolNum;
+        this.grade = grade;
+        this.classNum = classNum;
+        this.num = num;
         this.electiveSubject = electiveSubject;
         this.classRoomEntity = classRoomEntity;
         this.version = 0L;

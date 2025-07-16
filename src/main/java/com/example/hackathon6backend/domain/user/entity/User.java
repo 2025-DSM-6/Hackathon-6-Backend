@@ -14,20 +14,24 @@ public class User {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
     
-    @Column(length = 100)
+    @Column(nullable = false, length = 100)
     private String accountId;
     
-    @Column(length = 50)
+    @Column(nullable = false, length = 50)
     private String username;
+
+    @Column(nullable = false, length = 64)
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Builder
-    public User(String accountId, String username, Role role) {
+    public User(String accountId, String password, String username, Role role) {
         this.accountId = accountId;
+        this.password = password;
         this.username = username;
         this.role = role;
     }

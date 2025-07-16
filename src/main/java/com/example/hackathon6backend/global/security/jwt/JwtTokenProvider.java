@@ -1,5 +1,6 @@
 package com.example.hackathon6backend.global.security.jwt;
 
+import com.example.hackathon6backend.domain.user.entity.Role;
 import com.example.hackathon6backend.global.exception.ExpiredJwtException;
 import com.example.hackathon6backend.global.exception.InvalidJwtException;
 import com.example.hackathon6backend.global.security.auth.AuthDetailsService;
@@ -28,18 +29,19 @@ public class JwtTokenProvider {
         this.secretKeySpec = new SecretKeySpec(jwtProperties.getSecretKey().getBytes(), SignatureAlgorithm.HS256.getJcaName());
     }
 
-    public String generateToken(String accountId, String type, Long exp) {
+    public String generateToken(String accountId, String type, Long exp, Role role) {
         return Jwts.builder()
             .signWith(secretKeySpec)
             .setSubject(accountId)
             .setHeaderParam("type", type)
+            .claim("role", role)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
             .compact();
     }
 
-    public String generateAccessToken(String accountId) {
-        return generateToken(accountId, "access", jwtProperties.getAccessExp());
+    public String generateAccessToken(String accountId, Role role) {
+        return generateToken(accountId, "access", jwtProperties.getAccessExp(), role);
     }
 
     public String parseToken(String bearerToken) {
