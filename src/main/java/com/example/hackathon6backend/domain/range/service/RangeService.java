@@ -10,7 +10,7 @@ import com.example.hackathon6backend.domain.range.repository.RangeRepository;
 import com.example.hackathon6backend.domain.subject.entity.Subject;
 import com.example.hackathon6backend.domain.subject.repository.SubjectRepository;
 import com.example.hackathon6backend.domain.user.entity.Teacher;
-import com.example.hackathon6backend.domain.user.repository.TeacherRepository;
+import com.example.hackathon6backend.domain.user.entity.repository.TeacherRepository;
 import com.example.hackathon6backend.global.error.exception.ErrorCode;
 import com.example.hackathon6backend.global.error.exception.HackathonException;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class RangeService {
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new HackathonException(ErrorCode.SUBJECT_NOT_FOUND));
 
-        if (!subject.getUser().getUserId().equals(teacher.getUser().getUserId())) {
+        if (!subject.getUser().getId().equals(teacher.getUser().getId())) {
             throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
         }
 
@@ -66,7 +66,7 @@ public class RangeService {
         Teacher teacher = teacherRepository.findById(userId)
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
-        List<Range> ranges = rangeRepository.findAllByTeacherId(teacher.getUser().getUserId());
+        List<Range> ranges = rangeRepository.findAllByTeacherId(teacher.getUser().getId());
         
         return ranges.stream()
                 .map(RangeResponse::of)
@@ -81,7 +81,7 @@ public class RangeService {
         Range range = rangeRepository.findById(rangeId)
                 .orElseThrow(() -> new RangeException(ErrorCode.RANGE_NOT_FOUND));
 
-        if (!range.getSubject().getUser().getUserId().equals(teacher.getUser().getUserId())) {
+        if (!range.getSubject().getUser().getId().equals(teacher.getUser().getId())) {
             throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
         }
 
@@ -96,7 +96,7 @@ public class RangeService {
         Range range = rangeRepository.findById(rangeId)
                 .orElseThrow(() -> new RangeException(ErrorCode.RANGE_NOT_FOUND));
 
-        if (!range.getSubject().getUser().getUserId().equals(teacher.getUser().getUserId())) {
+        if (!range.getSubject().getUser().getId().equals(teacher.getUser().getId())) {
             throw new RangeException(ErrorCode.INVALID_RANGE_ACCESS);
         }
 
