@@ -15,15 +15,24 @@ import lombok.NoArgsConstructor;
 public class Student {
     
     @Id
+    private Long id;
+
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     
     @Column(name = "solved_score")
-    private Long solvedScore;
+    private Long solvedScore = 0L;
     
-    @Column(name = "school_num", length = 4)
-    private String schoolNum;
+    @Column(name = "grade")
+    private Integer grade;
+
+    @Column(name = "class_num")
+    private Integer classNum;
+
+    @Column(name = "num")
+    private Integer num;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "elective_subject")
@@ -34,11 +43,13 @@ public class Student {
     private ClassRoom classEntity;
 
     @Builder
-    public Student(User user, Long solvedScore, String schoolNum, 
+    public Student(User user, Long solvedScore, Integer grade, Integer classNum, Integer num,
                   ElectiveSubject electiveSubject, ClassRoom classEntity) {
         this.user = user;
         this.solvedScore = solvedScore;
-        this.schoolNum = schoolNum;
+        this.grade = grade;
+        this.classNum = classNum;
+        this.num = num;
         this.electiveSubject = electiveSubject;
         this.classEntity = classEntity;
     }
