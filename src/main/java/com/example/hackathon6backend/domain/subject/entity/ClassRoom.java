@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_class")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Class {
+public class ClassRoom {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Class {
     private Integer grade;
 
     @Builder
-    public Class(ClassMajor classMajor, String className, Integer grade) {
+    public ClassRoom(ClassMajor classMajor, String className, Integer grade) {
         this.classMajor = classMajor;
         this.className = className;
         this.grade = grade;
