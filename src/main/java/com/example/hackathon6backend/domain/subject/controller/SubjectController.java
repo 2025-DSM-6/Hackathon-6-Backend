@@ -49,7 +49,7 @@ public class SubjectController {
                 ));
     }
 
-    @GetMapping
+    @GetMapping("/addition")
     public ResponseEntity<ApiResponse<List<SubjectResponse>>> getMySubjects() {
         List<SubjectResponse> response = subjectService.getMySubjects(userFacade.getUser().getId());
         return ResponseEntity.ok(
@@ -73,7 +73,7 @@ public class SubjectController {
                 ));
     }
 
-    @DeleteMapping("/{subject-id}")
+    @DeleteMapping("/delete/{subject-id}")
     public ResponseEntity<ApiResponse<Void>> deleteSubject(
             @PathVariable("subject-id") Long subjectId
     ) {
