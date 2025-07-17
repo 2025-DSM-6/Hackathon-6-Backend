@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import com.example.hackathon6backend.domain.range.dto.request.RangeContentRequest;
+import com.example.hackathon6backend.domain.range.dto.response.TeacherRangeResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -65,14 +66,15 @@ public class RangeService {
         });
     }
 
-    public List<RangeResponse> getAllRanges(Long userId) {
+    public List<TeacherRangeResponse> getAllRanges(Long userId) {
         Teacher teacher = teacherRepository.findById(userId)
                 .orElseThrow(() -> new HackathonException(ErrorCode.FORBIDDEN));
 
         List<Range> ranges = rangeRepository.findAllByTeacherId(teacher.getUser().getId());
-        
+
         return ranges.stream()
-                .map(RangeResponse::of)
+                .flatMap(range -> range.getRangeContents().stream()
+                        .map(content -> TeacherRangeResponse.of(range.getSubject(), content)))
                 .toList();
     }
 

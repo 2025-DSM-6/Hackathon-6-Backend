@@ -3,6 +3,7 @@ package com.example.hackathon6backend.domain.range.controller;
 import com.example.hackathon6backend.domain.range.dto.request.CreateRangeRequest;
 import com.example.hackathon6backend.domain.range.dto.request.UpdateRangeRequest;
 import com.example.hackathon6backend.domain.range.dto.response.RangeResponse;
+import com.example.hackathon6backend.domain.range.dto.response.TeacherRangeResponse;
 import com.example.hackathon6backend.domain.range.service.RangeService;
 import com.example.hackathon6backend.domain.user.facade.UserFacade;
 import com.example.hackathon6backend.global.common.ApiResponse;
@@ -38,11 +39,11 @@ public class RangeController {
     }
 
     @GetMapping("/addition")
-    public ResponseEntity<ApiResponse<List<RangeResponse>>> getAllRanges(
+    public ResponseEntity<ApiResponse<List<TeacherRangeResponse>>> getAllRanges(
             @RequestParam(required = false) Long userId
     ) {
         Long finalUserId = userId != null ? userId : userFacade.getUser().getId();
-        List<RangeResponse> response = rangeService.getAllRanges(finalUserId);
+        List<TeacherRangeResponse> response = rangeService.getAllRanges(finalUserId);
         return ResponseEntity.ok(
                 ApiResponse.success(
                         HttpStatus.OK,
