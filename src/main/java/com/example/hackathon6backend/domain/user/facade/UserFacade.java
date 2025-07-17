@@ -1,7 +1,7 @@
 package com.example.hackathon6backend.domain.user.facade;
 
 import com.example.hackathon6backend.domain.user.entity.User;
-import com.example.hackathon6backend.domain.user.entity.repository.UserRepository;
+import com.example.hackathon6backend.domain.user.repository.UserRepository;
 import com.example.hackathon6backend.domain.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

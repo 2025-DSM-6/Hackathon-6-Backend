@@ -1,4 +1,4 @@
-package com.example.hackathon6backend.domain.user.entity.repository;
+package com.example.hackathon6backend.domain.user.repository;
 
 import com.example.hackathon6backend.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;

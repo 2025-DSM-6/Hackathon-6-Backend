@@ -1,9 +1,9 @@
 package com.example.hackathon6backend.domain.user.service;
 
 import com.example.hackathon6backend.domain.user.dto.request.UpdateSubjectRequest;
-import com.example.hackathon6backend.domain.user.entity.Student;
+import com.example.hackathon6backend.domain.student.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.User;
-import com.example.hackathon6backend.domain.user.entity.repository.StudentRepository;
+import com.example.hackathon6backend.domain.student.repository.StudentRepository;
 import com.example.hackathon6backend.domain.user.exception.UserNotFoundException;
 import com.example.hackathon6backend.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
