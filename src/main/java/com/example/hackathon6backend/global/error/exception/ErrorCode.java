@@ -38,7 +38,10 @@ public enum ErrorCode {
     INVALID_ROLE(HttpStatus.UNAUTHORIZED, "Invalid Role"),
 
     // auth
-    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "Password Mismatch");
+    PASSWORD_MISMATCH(HttpStatus.UNAUTHORIZED, "Password Mismatch"),
+
+    // student
+    STUDENT_NOT_FOUND(HttpStatus.NOT_FOUND, "Student Not Found");
 
     private final HttpStatus status;
     private final String message;
