@@ -129,8 +129,12 @@ public class SubjectService {
                 .build();
         subjectRepository.save(subject);
 
-        // 선택된 전공에 해당하는 모든 반 조회
-        List<ClassRoom> classRooms = classRoomRepository.findAllByClassMajorIn(request.getClassMajors());
+        // 선택된 전공과 학년에 해당하는 모든 반 조회
+        List<ClassRoom> classRooms = classRoomRepository.findAllByGradeAndClassMajorIn(
+                request.getGrade(),
+                request.getClassMajors()
+        );
+        
         if (classRooms.isEmpty()) {
             throw ClassRoomNotFoundException.EXCEPTION;
         }

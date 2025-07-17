@@ -16,4 +16,6 @@ public class CreateSubjectByMajorRequest {
 
     @NotEmpty(message = "전공을 선택해주세요.")
     private List<ClassMajor> classMajors;
+
+    private Integer grade; // null이면 전체 학년
 } 

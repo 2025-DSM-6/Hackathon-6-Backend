@@ -37,7 +37,7 @@ public class RangeController {
                 ));
     }
 
-    @GetMapping
+    @GetMapping("/addition")
     public ResponseEntity<ApiResponse<List<RangeResponse>>> getAllRanges(
             @RequestParam(required = false) Long userId
     ) {
