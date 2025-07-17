@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.user.dto.response;
 
-import com.example.hackathon6backend.domain.user.entity.Role;
+import com.example.hackathon6backend.domain.user.entity.role.Role;
 import lombok.Builder;
 
 @Builder

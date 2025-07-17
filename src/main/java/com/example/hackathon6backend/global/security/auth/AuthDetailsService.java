@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.global.security.auth;
 
-import com.example.hackathon6backend.domain.user.entity.repository.UserRepository;
+import com.example.hackathon6backend.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

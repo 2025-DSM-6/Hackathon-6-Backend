@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.global.security.jwt;
 
-import com.example.hackathon6backend.domain.user.entity.Role;
+import com.example.hackathon6backend.domain.user.entity.role.Role;
 import com.example.hackathon6backend.global.exception.ExpiredJwtException;
 import com.example.hackathon6backend.global.exception.InvalidJwtException;
 import com.example.hackathon6backend.global.security.auth.AuthDetailsService;

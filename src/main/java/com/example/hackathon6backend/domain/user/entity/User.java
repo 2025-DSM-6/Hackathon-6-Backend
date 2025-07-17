@@ -1,5 +1,6 @@
 package com.example.hackathon6backend.domain.user.entity;
 
+import com.example.hackathon6backend.domain.user.entity.role.Role;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
