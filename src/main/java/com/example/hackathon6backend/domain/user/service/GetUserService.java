@@ -1,6 +1,6 @@
 package com.example.hackathon6backend.domain.user.service;
 
-import com.example.hackathon6backend.domain.user.dto.response.GetUserResponse;
+import com.example.hackathon6backend.domain.student.presentation.response.GetMyInformResponse;
 import com.example.hackathon6backend.domain.student.entity.Student;
 import com.example.hackathon6backend.domain.user.entity.User;
 import com.example.hackathon6backend.domain.student.repository.StudentRepository;
@@ -18,12 +18,12 @@ public class GetUserService {
     private final StudentRepository studentRepository;
 
     @Transactional(readOnly = true)
-    public GetUserResponse execute() {
+    public GetMyInformResponse execute() {
         User user = userFacade.getUser();
         Student student = studentRepository.findById(user.getId())
             .orElseThrow(() -> UserNotFoundException.EXCEPTION);
 
-        return GetUserResponse.builder()
+        return GetMyInformResponse.builder()
             .id(user.getId())
             .userName(user.getUsername())
             .grade(student.getGrade())
